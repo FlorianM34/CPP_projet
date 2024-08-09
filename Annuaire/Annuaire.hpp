@@ -14,7 +14,7 @@ class Annuaire {
 
         Annuaire();
 
-        Annuaire(const vector<Personne>& listePersonne);
+        Annuaire(std::vector<Personne> listePersonne);
 
         void addPersonne(Personne p);
         Personne getPersonneByName(std::string name);

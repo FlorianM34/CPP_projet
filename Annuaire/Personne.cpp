@@ -36,7 +36,6 @@ int Personne::getUid(){
     return uid;
 }
 
-void Personne::afficherInfos(){
-    cout << "Nom :" << nom << ", Age" << age << endl;
+void Personne::afficherInfos() {
+    cout << "Nom: " << nom << ", Age: " << age << endl;
 }
-

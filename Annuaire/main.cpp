@@ -13,11 +13,10 @@ int main() {
     Personne pio("Pio", 20, "37738353");
     Personne mathis("Mathis", 20, "BANANE");
 
-    vector<Personne> listePersonne = {
-        sarah,
-        pio,
-        mathis,
-    };
+    vector<Personne> listePersonne;
+    listePersonne.push_back(sarah);
+    listePersonne.push_back(pio);
+    listePersonne.push_back(mathis);
 
     Annuaire annuaire(listePersonne);
 
@@ -25,5 +24,7 @@ int main() {
 
     cout << "Personne search : " << endl;
     personneSearch.afficherInfos();
+
+    return 0;
 
 }

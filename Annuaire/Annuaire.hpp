@@ -10,6 +10,7 @@ class Annuaire {
     private: 
         std::vector<Personne> listePersonne;
 
+
     public :
 
         Annuaire();
@@ -19,6 +20,7 @@ class Annuaire {
         void addPersonne(Personne p);
         Personne getPersonneByName(std::string name);
         void removePersonneByName(std::string name);
+        std::vector<Personne> getPersonnesByNumber(std::string pn);
 };
 
 

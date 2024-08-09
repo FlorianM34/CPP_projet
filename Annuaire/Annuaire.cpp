@@ -2,6 +2,7 @@
 #include <string>
 
 #include "Annuaire.hpp"
+#include "PeopleNotFoundException.hpp"
 using namespace std;
 
 
@@ -21,7 +22,7 @@ Personne Annuaire::getPersonneByName(string name) {
             return listePersonne[i];
         }
     }
-    throw runtime_error("No one was found with this name");
+    throw PeopleNotFoundException("No peolpe find with this name", 1);
 }
 
 void Annuaire::removePersonneByName(std::string name) {
@@ -31,6 +32,24 @@ void Annuaire::removePersonneByName(std::string name) {
             return;
         }
     }
-    throw std::runtime_error("Personne non trouvée");
+    throw PeopleNotFoundException("No peolpe find with this name", 2);
 }
 
+vector<Personne> Annuaire::getPersonnesByNumber(string pn){
+
+    vector<Personne> personnesFound;
+    bool hasFound = false;
+    for (Personne personne : listePersonne){
+        if(personne.getPhoneNumber().rfind(pn, 0) == 0){ //search any number that starts as for suffix pn
+            personnesFound.push_back(personne);
+            hasFound = true;
+        }
+    }
+    
+    if(hasFound){
+        return personnesFound;
+    }
+    
+    throw PeopleNotFoundException("No peolpe find that start or with this number", 3);
+
+}

@@ -10,7 +10,6 @@ class Annuaire {
     private: 
         std::vector<Personne> listePersonne;
 
-
     public :
 
         Annuaire();

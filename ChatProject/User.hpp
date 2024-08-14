@@ -2,8 +2,7 @@
 #define DEF_USER
 
 #include "Genre.hpp"
-// #include "Room.hpp"
-
+#include "Room.hpp"
 #include <iostream>
 #include <string>
 #include <netinet/in.h>
@@ -32,11 +31,10 @@ class User {
 
         //custom
         Genre sexe_;
-        // Room currentRoom_;
+        Room currentRoom_;
         
     
     public : 
-
 
 
         User(std::string serverAddress, int port);
@@ -47,7 +45,7 @@ class User {
         std::string getIp();
         int getAge();
         std::string getUserId();
-        // Room getCurrentRoom();
+        Room getCurrentRoom();
 
         // void joinRoom(std::string roomId);
         // void leaveRoom();

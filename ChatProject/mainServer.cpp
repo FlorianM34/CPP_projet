@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
-// #include "Room.hpp"
-// #include "User.hpp"
-// #include "Genre.hpp"
+#include "Room.hpp"
+#include "User.hpp"
+#include "Genre.hpp"
 #include "Server.hpp"
 
 

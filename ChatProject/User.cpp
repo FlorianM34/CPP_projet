@@ -97,9 +97,9 @@ string User::getUserId() {
     return userId_;
 }
 
-// Room User::getCurrentRoom() {
-//     return currentRoom_;
-// }
+Room User::getCurrentRoom() {
+    return currentRoom_;
+}
 
 
 void User::sendMail(std::string playerName){

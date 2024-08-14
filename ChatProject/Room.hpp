@@ -16,11 +16,11 @@ class Room {
         std::vector<User> userList_;
         std::vector<std::string> bannedIpList_;
         
-        void isIpExist(std::string ip);
-        void isNameExist(std::string name);
 
         std::string roomId_;
 
+
+        void isPlayerAlreadyBanned(std::string ip);
         
     public :
 
@@ -37,10 +37,8 @@ class Room {
         void changeMaxChaters(int maxChaters);
         
 
-        void banByIp(std::string ip);
-        void banByName(std::string name);
-        void kickByName(std::string name);
-        void kickByIp(std::string ip);
+        void banById(std::string id);
+        void kickById(std::string id);
 
         
 

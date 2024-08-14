@@ -3,6 +3,10 @@
 #include "PlayerNotFoundException.hpp"
 #include "Room.hpp"
 #include <cstdlib> 
+#include <iostream>
+#include <cstring>
+#include <sys/socket.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -29,27 +33,6 @@ Room::Room() : roomName_("waitingRoom"), maxChaters_(100) {}
 
 ////////////////////////////////////////////////////////////////////////////
 
-void Room::isIpExist(string ip){
-    for( User user : userList_ ){
-        if(user.getIp() == ip){
-            return ;
-        }
-    }
-
-    throw PlayerNotFoundException("This player ip do not exist", 1);
-}
-
-void Room::isNameExist(string name){ 
-    for( User user : userList_ ){
-        if(user.getFirstname() == name){
-            return ;
-        }
-    }
-
-    throw PlayerNotFoundException("This player ip do not exist", 2);
-}
-
-
 int Room::getMaxChaters() {
     return maxChaters_;
 }
@@ -75,36 +58,49 @@ void Room::changeMaxChaters(int maxChaters){
     maxChaters_ = maxChaters;
 }
 
+void Room::isPlayerAlreadyBanned(std::string ip) {
 
-void Room::banByIp(std::string ip){
+}
+
+void Room::banById(std::string id){
+
     try {
-        isIpExist(ip);
 
         for( User user : userList_){
-            if(user.getIp() == ip){
-                // bannedUsername = user.getUsername();
+            if(user.getUserId() == id){
+                // request server to kick this player
                 bannedIpList_.push_back(user.getIp());
                 return;
 
             }
         }
 
+        throw PlayerNotFoundException("No player found with this name", 1);
+
         
     } catch(PlayerNotFoundException e){
         cout << "error number " << e.getCode() << "message  : \n" << e.what() << endl;
+    }    
+
+}
+
+void Room::kickById(std::string id){
+    try {
+
+    for( User user : userList_){
+        if(user.getUserId() == id){
+            // request server to kick this player
+            return;
+
+        }
     }
 
+    throw PlayerNotFoundException("No player found with this name", 2);
+
     
+} catch(PlayerNotFoundException e){
+    cout << "error number " << e.getCode() << "message  : \n" << e.what() << endl;
+}    
 }
 
-void Room::banByName(std::string name){
-
-}
-
-void Room::kickByName(std::string name){
-
-}
-void Room::kickByIp(std::string ip){
-
-}
 

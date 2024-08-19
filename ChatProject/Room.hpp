@@ -5,7 +5,9 @@
 #include <string>
 #include <ctime>
 #include <vector>
-#include "User.hpp"
+
+
+class User;
 
 
 class Room {
@@ -13,7 +15,7 @@ class Room {
         std::string roomName_;
         int maxChaters_;
         std::string dateStr_;
-        std::vector<User> userList_;
+        std::vector<User*> userList_;
         std::vector<std::string> bannedIpList_;
         
 
@@ -30,7 +32,7 @@ class Room {
         int getMaxChaters();
         std::string getRoomName();
         std::string getDate();
-        std::vector<User> getUserList();
+        std::vector<User*> getUserList();
         std::vector<std::string> getBannedUsersIp();
 
         void renameRoom(std::string roomName);

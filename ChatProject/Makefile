@@ -5,8 +5,8 @@ CXX = g++
 CXXFLAGS = -std=c++11 -Wall
 
 # Fichiers source pour chaque programme
-CLIENT_SRC = mainClient.cpp User.cpp  Room.cpp
-SERVER_SRC = mainServer.cpp Server.cpp Genre.cpp Room.cpp
+CLIENT_SRC = mainClient.cpp User.cpp Room.cpp
+SERVER_SRC = mainServer.cpp Server.cpp Room.cpp User.cpp
 
 # Fichiers objets
 CLIENT_OBJ = $(CLIENT_SRC:.cpp=.o)

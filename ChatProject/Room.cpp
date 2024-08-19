@@ -1,12 +1,14 @@
 #include <iostream>
 #include <string>
-#include "PlayerNotFoundException.hpp"
-#include "Room.hpp"
 #include <cstdlib> 
 #include <iostream>
 #include <cstring>
 #include <sys/socket.h>
 #include <unistd.h>
+
+#include "PlayerNotFoundException.hpp"
+#include "Room.hpp"
+#include "User.hpp"
 
 using namespace std;
 
@@ -43,7 +45,7 @@ string Room::getRoomName(){
 string Room::getDate(){
     return dateStr_;
 }
-vector<User> Room::getUserList(){
+vector<User*> Room::getUserList(){
     return userList_;
 }
 
@@ -66,10 +68,10 @@ void Room::banById(std::string id){
 
     try {
 
-        for( User user : userList_){
-            if(user.getUserId() == id){
+        for( const auto &user : userList_){
+            if(user->getUserId() == id){
                 // request server to kick this player
-                bannedIpList_.push_back(user.getIp());
+                bannedIpList_.push_back(user->getIp());
                 return;
 
             }
@@ -87,8 +89,8 @@ void Room::banById(std::string id){
 void Room::kickById(std::string id){
     try {
 
-    for( User user : userList_){
-        if(user.getUserId() == id){
+    for( const auto &user : userList_){
+        if(user->getUserId() == id){
             // request server to kick this player
             return;
 

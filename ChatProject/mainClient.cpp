@@ -15,9 +15,11 @@ int main() {
     
     string address = "127.0.0.1";
     
-    User user(address, PORT);
+    User *user;
 
+    user = new User(address, PORT);
 
+    user->connectToServer();
 
 
 }

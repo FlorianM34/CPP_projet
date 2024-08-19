@@ -4,10 +4,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "Room.hpp"
 #include <netinet/in.h>
 
 #define PORT 8080;
+
+class Room;
 
 class Server {
 
@@ -21,10 +22,13 @@ class Server {
         void handleClient(int client_socket);
 
         void createRoom(std::string roomName, int maxPlayer);
+
+
+        Room *room;
     
     public :  
-        std::vector<Room> roomList;
-        Server(int port);  // Constructeur public
+        std::vector<Room*> roomList;
+        Server(int port);  
         ~Server();
         void start();
 

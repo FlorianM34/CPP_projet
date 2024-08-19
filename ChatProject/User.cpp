@@ -1,19 +1,20 @@
 #include <iostream>
 #include <string>
-
-#include "Genre.hpp"
-#include "User.hpp"
 #include <cstdlib> 
 #include <cstring>
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 
+#include "Genre.hpp"
+#include "User.hpp"
+
+
 using namespace std;
 
 
 User::User(std::string serverAddress, int port) 
-    : serverAddress_(serverAddress), port_(port) {
+    :  port_(port), serverAddress_(serverAddress) {
 
 
     string firstname;
@@ -97,7 +98,7 @@ string User::getUserId() {
     return userId_;
 }
 
-Room User::getCurrentRoom() {
+Room* User::getCurrentRoom() {
     return currentRoom_;
 }
 

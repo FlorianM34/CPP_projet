@@ -1,5 +1,5 @@
 #ifndef DEF_GENRE
-#define GENRE
+#define DEF_GENRE
 
 enum Genre {
     male,

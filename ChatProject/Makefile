@@ -2,11 +2,11 @@
 CXX = g++
 
 # Options de compilation
-CXXFLAGS = -std=c++11 -Wall
+CXXFLAGS = -std=c++11 -Wall -ggdb -O0
 
 # Fichiers source pour chaque programme
-CLIENT_SRC = mainClient.cpp User.cpp Room.cpp
-SERVER_SRC = mainServer.cpp Server.cpp Room.cpp User.cpp
+CLIENT_SRC = mainClient.cpp User.cpp Room.cpp Message.cpp 
+SERVER_SRC = mainServer.cpp Server.cpp Room.cpp User.cpp Message.cpp
 
 # Fichiers objets
 CLIENT_OBJ = $(CLIENT_SRC:.cpp=.o)

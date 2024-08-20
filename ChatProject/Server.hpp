@@ -25,6 +25,8 @@ class Server {
 
 
         Room *room;
+
+        
     
     public :  
         std::vector<Room*> roomList;

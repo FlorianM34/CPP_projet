@@ -6,9 +6,12 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include <unordered_map>
+#include <sstream>
 
 #include "Room.hpp"
 #include "Server.hpp"
+#include "Message.hpp"
 
 using namespace std;
 
@@ -55,7 +58,7 @@ Server::Server(int port) : port(port), addrlen(sizeof(address)) {
         exit(EXIT_FAILURE);
     }
 
-    std::cout << "Server started on port " << port << std::endl;
+    cout << "Server started on port " << port << endl;
 }
 
 Server::~Server() {
@@ -80,12 +83,15 @@ void Server::start() {
 }
 
 void Server::handleClient(int client_socket) {
-    char buffer[1024] = {0};
+    char buffer[MESSAGE_SIZE] = {0};
     const char *hello = "Hello from server";
 
-    read(client_socket, buffer, 1024);
-    std::cout << "Message from client: " << buffer << std::endl;
+    read(client_socket, buffer, MESSAGE_SIZE);
+    Message message = Message::deserialize(buffer);
+
+    cout << "Message from : " << message.getSender() << endl;
+    cout << message.getContent() << endl;
 
     send(client_socket, hello, strlen(hello), 0);
-    std::cout << "Hello message sent to client" << std::endl;
+    cout << "Message receive from " << endl;
 }

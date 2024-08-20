@@ -8,7 +8,7 @@
 
 using namespace std;
 
-#define PORT 8080
+#define C_PORT 8080
 
 
 int main() {
@@ -17,7 +17,7 @@ int main() {
     
     User *user;
 
-    user = new User(address, PORT);
+    user = new User(address, C_PORT);
 
     user->connectToServer();
 

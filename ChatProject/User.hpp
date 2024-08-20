@@ -33,6 +33,11 @@ class User {
         //custom
         Genre sexe_;
         Room *currentRoom_;
+
+
+        //function
+
+        void sendMessage();
         
     
     public : 

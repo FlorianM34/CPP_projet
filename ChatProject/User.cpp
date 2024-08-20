@@ -122,7 +122,6 @@ void User::sendMessage() {
     cout << ">>> ";
     cin >> message;
 
-    cout << "MEESSSAAAGGGEEE! !!! !!! " << message << endl;
 
     Message dataMessage(username_, message);
 

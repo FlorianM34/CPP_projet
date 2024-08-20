@@ -89,8 +89,7 @@ void Server::handleClient(int client_socket) {
     read(client_socket, buffer, MESSAGE_SIZE);
     Message message = Message::deserialize(buffer);
 
-    cout << "Message from : " << message.getSender() << endl;
-    cout << message.getContent() << endl;
+    cout << message.getContent() << " : " << message.getSender() << endl;
 
     send(client_socket, hello, strlen(hello), 0);
     cout << "Message receive from " << endl;

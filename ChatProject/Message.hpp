@@ -21,6 +21,4 @@ class Message {
 
         std::string senderName_;
         std::string content_;
-
-
 };

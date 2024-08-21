@@ -66,20 +66,22 @@ Server::~Server() {
 }
 
 void Server::start() {
-    while (true) {
-        int client_socket;
+    int client_socket;
+    if ((client_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen)) >= 0) {
 
-
-        if ((client_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
-            perror("Accept failed");
-            continue;
+        while (true) {
+            handleClient(client_socket);
         }
 
-
-        handleClient(client_socket);
-
+        cout << "connection closed" << endl;
         close(client_socket);
     }
+
+    else {
+        perror("failed");
+        return;
+    }
+
 }
 
 void Server::handleClient(int client_socket) {
@@ -89,27 +91,30 @@ void Server::handleClient(int client_socket) {
 
     read(client_socket, buffer, MESSAGE_SIZE);
     Message message = Message::deserialize(buffer);
-    handleCommand(message);
+    ssize_t contentSize = message.getContent().length();
+    handleCommand(message.getContent(), contentSize);
 
     cout << message.getSender() << " : " << message.getContent() << endl;
     send(client_socket, receiveMessage, strlen(receiveMessage), 0);
 
 }
 
-void Server::handleCommand(Message message) {
+void Server::handleCommand(string content, ssize_t contentSize) {
 
-    if ( message.getContent().rfind("/create", 0) == 0) {
+    if (content.rfind("/create", 0) == 0) {
 
         cout << "Create command handled !";
 
         char * roomName;
+        const char * buffer = content.c_str();
         int pos = 0;
-        char * buffer = message.serialize();
 
         string createCommand = "/create ";
         ssize_t createCommandSize = createCommand.length();
-        ssize_t messageSize = message.getContent().length();
-        ssize_t roomNameSize = ( messageSize - createCommandSize ) + 1;
+
+        cout << "content size => " << contentSize << endl;
+
+        ssize_t roomNameSize = ( contentSize - createCommandSize ) + 1;
 
         cout << "room name size => " << roomNameSize << endl ;
 
@@ -124,15 +129,15 @@ void Server::handleCommand(Message message) {
         return ; // method for create
     }
 
-    else if ( message.getContent().rfind( "/join", 0 ) == 0) {
+    else if ( content.rfind( "/join", 0 ) == 0) {
         return ; //method for join
     }
 
-    else if ( message.getContent().rfind("/leave", 0) == 0) {
+    else if ( content.rfind("/leave", 0) == 0) {
         return ; // method to leave
     }
 
-    else if ( message.getContent().rfind("/rooms", 0) == 0) {
+    else if ( content.rfind("/rooms", 0) == 0) {
         return ; // method for rooms
     }
 

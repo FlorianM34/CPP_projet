@@ -15,7 +15,7 @@
 
 using namespace std;
 
-#define TEST true
+#define TEST false
 
 
 User::User(std::string serverAddress, int port) 

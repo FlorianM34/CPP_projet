@@ -28,7 +28,7 @@ class Server {
 
         Room *room;
 
-        void handleCommand(Message message);
+        void handleCommand(std::string contentBuffer, ssize_t contentSize);
     
     public :  
         std::vector<Room*> roomList;

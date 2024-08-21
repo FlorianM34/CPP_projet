@@ -10,12 +10,10 @@ using namespace std;
 
 int main() {
     
-
     Server *server;
 
     server = new Server(S_PORT);
 
     server->start();
-
 
 }

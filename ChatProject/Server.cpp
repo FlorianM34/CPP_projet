@@ -84,13 +84,63 @@ void Server::start() {
 
 void Server::handleClient(int client_socket) {
     char buffer[MESSAGE_SIZE] = {0};
-    const char *hello = "Hello from server";
+    char * receiveMessage = "ok";
+
 
     read(client_socket, buffer, MESSAGE_SIZE);
     Message message = Message::deserialize(buffer);
+    handleCommand(message);
 
-    cout << message.getContent() << " : " << message.getSender() << endl;
+    cout << message.getSender() << " : " << message.getContent() << endl;
+    send(client_socket, receiveMessage, strlen(receiveMessage), 0);
 
-    send(client_socket, hello, strlen(hello), 0);
-    cout << "Message receive from " << endl;
+}
+
+void Server::handleCommand(Message message) {
+
+    if ( message.getContent().rfind("/create", 0) == 0) {
+
+        cout << "Create command handled !";
+
+        char * roomName;
+        int pos = 0;
+        char * buffer = message.serialize();
+
+        string createCommand = "/create ";
+        ssize_t createCommandSize = createCommand.length();
+        ssize_t messageSize = message.getContent().length();
+        ssize_t roomNameSize = ( messageSize - createCommandSize ) + 1;
+
+        cout << "room name size => " << roomNameSize << endl ;
+
+        roomName = (char *) malloc( roomNameSize );
+
+        pos += createCommandSize;
+
+        memcpy(roomName, buffer + pos, roomNameSize);
+
+        cout << "room name => " << roomName << endl;
+
+        return ; // method for create
+    }
+
+    else if ( message.getContent().rfind( "/join", 0 ) == 0) {
+        return ; //method for join
+    }
+
+    else if ( message.getContent().rfind("/leave", 0) == 0) {
+        return ; // method to leave
+    }
+
+    else if ( message.getContent().rfind("/rooms", 0) == 0) {
+        return ; // method for rooms
+    }
+
+    else {
+        cout << " simple chat" << endl;
+        return ;
+    }
+
+
+
 }

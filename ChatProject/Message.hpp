@@ -16,9 +16,11 @@ class Message {
 
         std::string getSender();
         std::string getContent();
+        ssize_t getMessageSize();
 
     private:
 
         std::string senderName_;
         std::string content_;
+        ssize_t messageSize_;
 };

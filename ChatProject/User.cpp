@@ -15,7 +15,7 @@
 
 using namespace std;
 
-#define TEST false
+#define TEST true
 
 
 User::User(std::string serverAddress, int port) 
@@ -120,8 +120,7 @@ void User::sendMessage() {
 
     string message;
     cout << ">>> ";
-    cin >> message;
-
+    getline(cin, message);
 
     Message dataMessage(username_, message);
 

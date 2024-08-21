@@ -6,6 +6,9 @@
 #include <vector>
 #include <netinet/in.h>
 
+
+class Message ;
+
 #define PORT 8080;
 
 class Room;
@@ -23,10 +26,9 @@ class Server {
 
         void createRoom(std::string roomName, int maxPlayer);
 
-
         Room *room;
 
-        
+        void handleCommand(Message message);
     
     public :  
         std::vector<Room*> roomList;

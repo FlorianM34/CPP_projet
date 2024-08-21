@@ -12,16 +12,18 @@ Message::Message(string senderName, string message) : senderName_(senderName), c
 
 char* Message::serialize() {
 
-    cout << content_ << endl;
-    cout << content_ << endl;
-    cout << content_ << endl;
-    cout << content_ << endl;
+
+
 
     ssize_t senderNameSize = senderName_.length() + 1;
     ssize_t contentSize = content_.length() + 1;
 
+    //SENDER NAME SERIALIZATION
+
     char *buffer;
-    buffer = (char *) malloc(sizeof(ssize_t) * 2 + senderNameSize + contentSize);
+    ssize_t messageSize = sizeof(ssize_t) * 2 + senderNameSize + contentSize;
+    messageSize_ = messageSize;
+    buffer = (char *) malloc(messageSize);
     int pos=0;
     
     memcpy(buffer+pos, (void *)&senderNameSize, sizeof(ssize_t));
@@ -32,7 +34,9 @@ char* Message::serialize() {
     pos += senderNameSize;
 
     cout << "After senderName Pos=" << pos << endl;
-    
+
+    // CONTENT SERIALIZATION
+
     memcpy(buffer+pos, (void *)&contentSize, sizeof(ssize_t));
     pos += sizeof(ssize_t);
     cout << "After contentSize Pos=" << pos << endl;
@@ -86,3 +90,6 @@ std::string Message::getSender() {
     return senderName_;
 }
 
+ssize_t Message::getMessageSize() {
+    return messageSize_;
+}
